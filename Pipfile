@@ -13,7 +13,8 @@ name = "pypi"
 
 mypy = "*"
 typing_extensions = "*"
-nose2 = "*"
+green = "*"
+pipenv = "*"
 
 
 [requires]
