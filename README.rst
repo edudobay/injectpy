@@ -1,7 +1,7 @@
 injectpy
 ========
 
-A package featuring dependency injection and a service container (also known as an **IoC container**, where IoC stands for *Inversion of Control*) for Python. An experiment in progress. Details will be filled in soon.
+A Python package featuring dependency injection and a service container (also known as an **IoC container**, where IoC stands for *Inversion of Control*). An experiment in progress; details will be filled in soon.
 
 The main inspiration for this project was `pinject`_, a dependency injection library developed by Google but no longer maintained and with no support for Python 3.  Ideas were borrowed also from other dependency injection libraries such as `Dagger`_.
 
