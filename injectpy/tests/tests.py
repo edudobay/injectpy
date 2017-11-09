@@ -158,6 +158,7 @@ class ObjectGraphTest(unittest.TestCase):
         class Bar: pass
 
         scope.add_provider(lambda: Bar(), bind_to_class=Bar)
+        self.assertIsInstance(graph.provide(Bar), Bar)
 
         @scope.provider(bind_to_class=Foo, args=[Bar])
         def foo(bar):
@@ -170,6 +171,7 @@ class ObjectGraphTest(unittest.TestCase):
 
 class AnnotationTest(unittest.TestCase):
 
+    @unittest.skip('incomplete')
     def test_scope_bindings_should_preserve_declared_type_hints(self):
         class Foo: pass
 

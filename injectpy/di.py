@@ -24,12 +24,13 @@ class ObjectGraph:
         if mapping is None:
             raise _component_not_mapped(key)
 
-        dependencies = {k: self.provide(k) for k in mapping.get_dependencies()}
+        needed = mapping.get_dependencies()
+        dependencies = {k: self.provide(k) for k in needed}
 
         args = [dependencies[k] for k in mapping.args]
         kwargs = {k: dependencies[k] for k in mapping.kwargs}
 
-        return mapping.provider()(*args, **kwargs)
+        return mapping.provider(*args, **kwargs)
 
 class Mapping:
     def __init__(self, factory, *,
@@ -45,8 +46,9 @@ class Mapping:
         self.singleton = singleton
         self.args = args or []
         self.kwargs = kwargs or {}
+        self.provider = self._provider()
 
-    def provider(self):
+    def _provider(self):
         if self.singleton:
             return SingletonProvider(self.factory)
         else:
