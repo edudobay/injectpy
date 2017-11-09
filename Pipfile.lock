@@ -1,18 +1,18 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fed97def86ced87d8ffaffac01a091a4518b6482d4f4f1d8b3041e4ddc46fea2"
+            "sha256": "c42c936aeae2b860aa8f5b3664d62ee223da6fc243be700e22bf24aad13ffa38"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
-            "implementation_version": "3.6.1",
+            "implementation_version": "3.6.0",
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "4.10.0-38-generic",
+            "platform_release": "4.9.0-4-amd64",
             "platform_system": "Linux",
-            "platform_version": "#42-Ubuntu SMP Tue Oct 10 13:24:27 UTC 2017",
-            "python_full_version": "3.6.1",
+            "platform_version": "#1 SMP Debian 4.9.51-1 (2017-09-28)",
+            "python_full_version": "3.6.0",
             "python_version": "3.6",
             "sys_platform": "linux"
         },
@@ -28,7 +28,12 @@
             }
         ]
     },
-    "default": {},
+    "default": {
+        "bk-ssuhb": {
+            "editable": true,
+            "path": "."
+        }
+    },
     "develop": {
         "certifi": {
             "hashes": [
