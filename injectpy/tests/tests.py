@@ -5,6 +5,7 @@ import injectpy.di as di
 class ProviderTest(unittest.TestCase):
 
     def test_provide_known_object(self):
+        "component can be provided with the name of the provider function"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
 
@@ -18,6 +19,7 @@ class ProviderTest(unittest.TestCase):
         self.assertIs(obj, provided)
 
     def test_component_can_be_added_via_component_scoped(self):
+        "component can be added via a component_scoped decorator"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
         scoped = di.component_scoped(scope)
@@ -31,6 +33,7 @@ class ProviderTest(unittest.TestCase):
         self.assertEquals(obj, graph.provide('foo'))
 
     def test_component_can_be_added_via_scope_provider(self):
+        "component can be added via @scope.provider()"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
 
@@ -43,6 +46,7 @@ class ProviderTest(unittest.TestCase):
         self.assertEquals(obj, graph.provide('foo'))
 
     def test_provide_unknown_object_should_fail(self):
+        "should fail when providing an object not added to the graph"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
         
@@ -50,6 +54,7 @@ class ProviderTest(unittest.TestCase):
             graph.provide('foo')
 
     def test_provide_object_from_parent_scope(self):
+        "an object from the parent scope can be provided in the child scope"
         root = di.Scope()
         child = di.Scope(parent=root)
         root_graph = di.ObjectGraph(root)
@@ -65,6 +70,7 @@ class ProviderTest(unittest.TestCase):
         self.assertEquals(obj, provided)
 
     def test_parent_does_not_provide_object_from_child_scope(self):
+        "an object from the child scope cannot be provided in the parent scope"
         root = di.Scope()
         child = di.Scope(parent=root)
         root_graph = di.ObjectGraph(root)
@@ -80,6 +86,7 @@ class ProviderTest(unittest.TestCase):
             provided = root_graph.provide('foo')
 
     def test_object_not_marked_as_singleton_is_initialized_twice(self):
+        "a non-singleton object is initialized once per provide()"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
         
@@ -93,6 +100,7 @@ class ProviderTest(unittest.TestCase):
         self.assertIsNot(first, second)
 
     def test_object_marked_as_singleton_is_not_initialized_twice(self):
+        "a singleton object is initialized only once within its scope"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
 
@@ -109,6 +117,7 @@ class ProviderTest(unittest.TestCase):
         self.assertIs(first, second)
 
     def test_lookup_by_class(self):
+        "lookup an object by its bound class"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
 
@@ -121,7 +130,8 @@ class ProviderTest(unittest.TestCase):
         provided = graph.provide(Foo)
         self.assertIsInstance(provided, Foo)
 
-    def test_dependency_declaration_with_lambda(self):
+    def test_imperative_dependency_declaration(self):
+        "imperative dependency declaration"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
 
@@ -133,6 +143,7 @@ class ProviderTest(unittest.TestCase):
         self.assertIsInstance(provided, Foo)
 
     def test_object_with_dependencies_cannot_be_provided(self):
+        "cannot provide an object with dependencies if they have not been mapped"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
 
@@ -148,6 +159,7 @@ class ProviderTest(unittest.TestCase):
 class ObjectGraphTest(unittest.TestCase):
 
     def test_provide_object_with_declared_dependencies(self):
+        "an object with dependencies can be provided if the dependencies have been mapped"
         scope = di.Scope()
         graph = di.ObjectGraph(scope)
 
